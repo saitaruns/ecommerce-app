@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Homepage from './Components/Homepage';
+import Nav from './Components/Nav';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import WomenClothing from './Components/WomenClothing';
+import Cart from './Components/Cart';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Router>
+    <Nav title="Shopper" items={["Home","About","Contact",<Cart/>]}/>
+      <Switch>
+        <Route path="/" exact component={Homepage}/>
+        <Route path="/womenclothing" component={WomenClothing} />
+      </Switch>
+    </Router>
+    </>
+  )
 }
 
 export default App;
