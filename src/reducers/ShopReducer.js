@@ -3,27 +3,21 @@ export const actionTypes = {
 }
 
 const initState = {
-  cart : []
+  cart : {}
 }
 
 const ShopReducer = (state = initState,action) => {
     switch(action.type){
         case actionTypes.ADD_TO_CART:
-            let cnt = 0;
-            state.cart.forEach(element => {
-              if(cnt===0 && element.id===action.payload.id){
-                cnt=element.count;
-              }
-            });
             return {
               ...state,
-              cart : [
+              cart : {
                 ...state.cart,
-                {
-                  ...action.payload,
-                  count:1
+                [action.payload.id]:{
+                  name : action.payload.name,
+                  count : state.cart[action.payload.id] ? state.cart[action.payload.id].count+1:1,
                 }
-              ]
+              }
             }
         default:            
             return state

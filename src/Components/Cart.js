@@ -6,9 +6,12 @@ const Cart = ({cart}) => {
     const [cartCount, setcartCount] = useState(0);
     useEffect(() => {
         let cnt=0;
-        cart.forEach(item => {
-            cnt+=item.count;
-        });
+        for (const cartid in cart) {
+            if (Object.hasOwnProperty.call(cart,cartid)) {
+                const element = cart[cartid];
+                cnt+=element.count;
+            }
+        }
         setcartCount(cnt);
     }, [cart])
     return (
