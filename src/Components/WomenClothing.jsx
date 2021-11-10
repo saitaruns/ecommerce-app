@@ -1,13 +1,19 @@
-import Clothing from './../assets/Clothing.json';
+import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 
-const WomenClothing = () => {
+const WomenClothing = ({womenclothes}) => {
   return (
     <div className="">
         <h1>Womens Clothing</h1>
-        {Clothing.map(item => <ProductCard key={item.id} item={item}/>)}
+        {womenclothes.map(item => <ProductCard key={item.id} item={item}/>)}
     </div>
   );
 };
 
-export default WomenClothing;
+const mapStoretoProps = (state)=>{
+  return {
+    womenclothes : state.womenclothes
+  }
+}
+
+export default connect(mapStoretoProps)(WomenClothing);

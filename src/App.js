@@ -6,7 +6,6 @@ import WomenClothing from './Components/WomenClothing';
 import Cart from './Components/Cart';
 
 function App() {
-  
   return (
     <>
     <Router>
