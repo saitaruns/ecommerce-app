@@ -10,7 +10,7 @@ const ProductCard = ({ item }) => {
         const action = {
             type: actionTypes.DELETE_FROM_CART,
             payload: {
-                id: item.id,
+                item: item,
             }
         };
         store.dispatch(action);
@@ -18,11 +18,12 @@ const ProductCard = ({ item }) => {
     const changeQuantity = () => {
         const action = {
             type: actionTypes.CHANGE_QUANTITY,
-            payload: {
-                id: item.id,
-                qty: qty
-            }
+            payload: {item:{
+                ...item,
+                count:parseInt(qty)
+            }}
         };
+        console.log(action)
         store.dispatch(action);
     }
     return (
@@ -30,7 +31,7 @@ const ProductCard = ({ item }) => {
             <img src="https://source.unsplash.com/random/1800x600" alt="random" />
             <div className="card-body">
                 <span className='card-title'>{item.name}</span>
-                <span className='card-desc'>
+                <span>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita corporis veritatis ullam porro voluptate eius fugiat magni officia voluptatibus ea, eos saepe tempore officiis exercitationem minus consectetur earum odio reprehenderit!
                 </span>
                 {location.pathname === '/yourcart' &&

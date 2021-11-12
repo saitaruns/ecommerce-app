@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard"
 
 const CartPage = ({cart}) => {
     return (
-        <div className="list">
+        <div className="cart-list">
             {cart.length > 0 ? cart.map((elem)=><ProductCard key={elem.id} item={elem}/>) : "Add items to cart"}
         </div>
     )
