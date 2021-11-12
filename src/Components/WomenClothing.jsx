@@ -30,7 +30,7 @@ const WomenClothing = () => {
       <div className="sec2">
         <h3>Women's Clothing</h3>
         {isLoading && <div className="loading">Loading.....</div>}
-        {prodList && prodList.map(item => <Link to={`/product/${item.id}`}><ProductCard key={item.id} item={item} /></Link>)}
+        {prodList && prodList.map(item => <Link key={item.id} to={`/product/${item.id}`}><ProductCard item={item} /></Link>)}
       </div>
     </div>
   );

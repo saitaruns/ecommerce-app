@@ -23,7 +23,7 @@ const DetailsPage = ({ match }) => {
         }
         fetchDoc();
 
-    },[])
+    },[match])
     //actions
     const addToCart = () => {
         const action = {
