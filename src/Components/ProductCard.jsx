@@ -23,7 +23,6 @@ const ProductCard = ({ item }) => {
                 count:parseInt(qty)
             }}
         };
-        console.log(action)
         store.dispatch(action);
     }
     return (
