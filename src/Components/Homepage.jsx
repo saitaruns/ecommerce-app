@@ -6,7 +6,7 @@ const Homepage = ()=>{
     return (
         <div className="banner">
             <img src={shopMens} alt="women"></img>
-            <Link to="womenclothing"><img src={shopWomens} alt="men"></img></Link>
+            <Link to="/womenclothing"><img src={shopWomens} alt="men"></img></Link>
         </div>
     )
 }

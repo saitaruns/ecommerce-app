@@ -1,22 +1,45 @@
-import React from 'react'
-import store from '../store'
-import {actionTypes} from "./../reducers/ShopReducer"
+import { actionTypes } from "../reducers/ShopReducer"
+import store from "../store"
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
-const ProductCard = ({item}) => {
-    //actions
-    const addToCart = ()=>{
-        const action={
-            type : actionTypes.ADD_TO_CART,
-            payload : {
-                id : item.id,
+const ProductCard = ({ item }) => {
+    const location = useLocation()
+    const [qty, setQty] = useState(item.count)
+    const deleteFromCart = () => {
+        const action = {
+            type: actionTypes.DELETE_FROM_CART,
+            payload: {
+                id: item.id,
+            }
+        };
+        store.dispatch(action);
+    }
+    const changeQuantity = () => {
+        const action = {
+            type: actionTypes.CHANGE_QUANTITY,
+            payload: {
+                id: item.id,
+                qty: qty
             }
         };
         store.dispatch(action);
     }
     return (
         <div className='card'>
-            <h3>{item.name}</h3>
-            <button className='btn' onClick={addToCart}>Add to Cart</button>
+            <img src="https://source.unsplash.com/random/1800x600" alt="random" />
+            <div className="card-body">
+                <span className='card-title'>{item.name}</span>
+                <span className='card-desc'>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita corporis veritatis ullam porro voluptate eius fugiat magni officia voluptatibus ea, eos saepe tempore officiis exercitationem minus consectetur earum odio reprehenderit!
+                </span>
+                {location.pathname === '/yourcart' &&
+                    <span>
+                        <input type="number" value={qty} onChange={(e) => setQty(e.target.value)} />
+                        <button className="btn" onClick={changeQuantity}>Change</button>
+                        <button className='btn' onClick={deleteFromCart}>Delete from Cart</button>
+                    </span>}
+            </div>
         </div>
     )
 }
