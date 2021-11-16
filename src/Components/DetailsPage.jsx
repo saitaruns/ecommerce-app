@@ -8,19 +8,19 @@ import { FaShoppingCart } from 'react-icons/fa';
 const DetailsPage = ({ match }) => {
     const [prod, setProd] = useState()
     const [isLoading, setisLoading] = useState(true)
-    const fetchProduct = () => {
-        console.log(match.params.id)
-        axios.get(`https://fakestoreapi.com/products/${match.params.id}`)
-            .then((res) => res.data)
-            .then((prod) => {
-                console.log(prod)
-                setProd(prod)
-                setisLoading(false)
-            })
-    }
     useEffect(() => {
+        const fetchProduct = () => {
+            console.log(match.params.id)
+            axios.get(`https://fakestoreapi.com/products/${match.params.id}`)
+                .then((res) => res.data)
+                .then((prod) => {
+                    console.log(prod)
+                    setProd(prod)
+                    setisLoading(false)
+                })
+        }
         fetchProduct();
-    }, [])
+    }, [match])
     //actions
     const addToCart = () => {
         const action = {
