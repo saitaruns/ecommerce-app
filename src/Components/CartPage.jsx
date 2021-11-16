@@ -9,7 +9,7 @@ const CartPage = ({cart}) => {
             </div>
             <div className="final-checkout">
                 <div>Total</div>
-                <span>Sub Total: ({cart.length} items) </span>{ cart.length > 0 && cart.reduce((p,c)=>p+c.count*c.price,0)}
+                <span>Sub Total: ({cart.length} items) </span> <span style={{fontSize:"20px",fontWeight:"bold"}}>{ cart.length > 0 && cart.reduce((p,c)=>p+c.count*c.price,0)}</span>
                 { cart.length > 0 && <button className="btn">Proceed To Buy</button>}
             </div>
         </div>
