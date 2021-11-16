@@ -1,29 +1,26 @@
 import React from 'react'
-import { db } from '../firebase';
-import { doc, getDoc } from "firebase/firestore"
 import { useEffect, useState } from 'react';
 import { actionTypes } from '../reducers/ShopReducer'
 import store from '../store'
+import axios from 'axios';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const DetailsPage = ({ match }) => {
     const [prod, setProd] = useState()
     const [isLoading, setisLoading] = useState(true)
-    useEffect(() => {
-        const fetchDoc = async () => {
-            const docRef = doc(db, "products", match.params.id);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
-                setProd({...docSnap.data(),id:docSnap.id})
+    const fetchProduct = () => {
+        console.log(match.params.id)
+        axios.get(`https://fakestoreapi.com/products/${match.params.id}`)
+            .then((res) => res.data)
+            .then((prod) => {
+                console.log(prod)
+                setProd(prod)
                 setisLoading(false)
-            } else {
-                console.log("No such document!");
-            }
-        }
-        fetchDoc();
-
-    },[match])
+            })
+    }
+    useEffect(() => {
+        fetchProduct();
+    }, [])
     //actions
     const addToCart = () => {
         const action = {
@@ -37,7 +34,16 @@ const DetailsPage = ({ match }) => {
     return (
         <>
             {isLoading && <div className="loading">Loading.....</div>}
-            {prod && prod.name}<button className='btn' onClick={addToCart}>Add to Cart</button>
+            {prod &&
+                <div className="details-page">
+                    <div className="details-image"><img src={prod.image} alt="" /></div>
+                    <div className="details">
+                        <div className="details-title">{prod.title}</div>
+                        <div className="details-price">₹{prod.price}</div>
+                        <button className='btn' onClick={addToCart}><FaShoppingCart style={{fontSize:"20px"}} /> Add to Cart</button>
+                        <div className="details-description">{prod.description}</div>
+                    </div>
+                </div>}
         </>
     )
 }

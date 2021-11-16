@@ -18,20 +18,29 @@ const ProductCard = ({ item }) => {
     const changeQuantity = () => {
         const action = {
             type: actionTypes.CHANGE_QUANTITY,
-            payload: {item:{
-                ...item,
-                count:parseInt(qty)
-            }}
+            payload: {
+                item: {
+                    ...item,
+                    count: parseInt(qty)
+                }
+            }
         };
         store.dispatch(action);
     }
     return (
         <div className='card'>
-            <img src="https://source.unsplash.com/random/1800x600" alt="random" />
+            <div className="card-image">
+                <img src={item.image} alt="random" />
+            </div>
             <div className="card-body">
-                <span className='card-title'>{item.name}</span>
-                <span>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita corporis veritatis ullam porro voluptate eius fugiat magni officia voluptatibus ea, eos saepe tempore officiis exercitationem minus consectetur earum odio reprehenderit!
+                <span className='card-title'>{item.title}</span>
+                {location.pathname === '/yourcart' &&
+                    <span style={{fontSize:"20px",fontWeight:"bold"}}>
+                        ₹ {item.price}
+                    </span>
+                }
+                <span className="card-desc">
+                    {item.description}
                 </span>
                 {location.pathname === '/yourcart' &&
                     <span>

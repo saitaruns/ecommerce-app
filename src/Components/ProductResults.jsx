@@ -1,22 +1,21 @@
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
-import { db } from '../firebase';
-import { collection, getDocs } from "firebase/firestore"
+// import { db } from '../firebase';
+// import { collection, getDocs } from "firebase/firestore"
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const WomenClothing = () => {
+const ProductResults = () => {
   const [prodList, setProdList] = useState([])
   const [isLoading, setisLoading] = useState(true)
   const fetchData = ()=>{
-    const colRef = collection(db, 'products')
-    getDocs(colRef).then((snapshot) => {
-      const newstate = []
-      snapshot.docs.forEach((doc) => {
-        newstate.push({...doc.data(),id:doc.id})
-      })
+    axios.get('https://fakestoreapi.com/products')
+    .then(res=>res.data)
+    .then((data)=>{
+      setProdList(data)
       setisLoading(false)
-      setProdList(newstate)
     })
+    .catch((err)=>console.log(err))
   }
   useEffect(() => {
     fetchData();
@@ -28,7 +27,7 @@ const WomenClothing = () => {
         <h3>Filters</h3>
       </div>
       <div className="sec2">
-        <h3>Women's Clothing</h3>
+        <h3>Search Results</h3>
         {isLoading && <div className="loading">Loading.....</div>}
         {prodList && prodList.map(item => <Link key={item.id} to={`/product/${item.id}`}><ProductCard item={item} /></Link>)}
       </div>
@@ -36,10 +35,4 @@ const WomenClothing = () => {
   );
 };
 
-// const mapStoretoProps = (state) => {
-//   return {
-//     womenclothes: state.womenclothes
-//   }
-// }
-
-export default WomenClothing;
+export default ProductResults;

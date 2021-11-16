@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { connect } from 'react-redux';
+import { FaShoppingCart } from 'react-icons/fa'
 
 const Cart = ({cart}) => {
     const [cartCount, setcartCount] = useState(0);
@@ -15,8 +16,9 @@ const Cart = ({cart}) => {
         setcartCount(cnt);
     }, [cart])
     return (
-        <div>
-            {cartCount} items in your cart
+        <div className='cart-link'>
+            <FaShoppingCart style={{padding:"0 5px",fontSize:"28px"}}/>
+            <span>{cartCount}</span>
         </div>
     )
 }
