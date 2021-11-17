@@ -16,6 +16,14 @@ nav{
   align-items: center;
   padding: 10px;
   background-color: var(--nav-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  -webkit-box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.27);
+  -moz-box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.27);
+  box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.27);
 }
 .nav-title{
   flex: 2;
@@ -46,24 +54,21 @@ a{
   align-items: center;
 }
 
-
-
+.page{
+  position: relative;
+  top: 60px;
+}
 
 /* home */
-.homepage > header > div:nth-child(even){
+.homepage > header > div{
   height: 300px;
   width: 100%;
-  background-color: red;
 }
-.homepage > header > div:nth-child(odd){
-  height: 300px;
-  width: 100%;
-  background-color: purple;
-}
-.section-1 img{
+.homepage img{
   cursor: pointer;
-  height: 300px;
-  width: 100%;
+  height: 280px;
+  width: calc( 100% - 20px );
+  padding: 10px;
   object-fit: cover;
 }
 
@@ -240,7 +245,6 @@ input{
 }
 
 .card-desc{
-  height: fit-content;
   overflow: hidden;
   text-overflow: ellipsis; 
   font-size: 1.2vw;
@@ -264,8 +268,4 @@ input{
   flex-direction: column;
   align-items: flex-start;
   color: black;
-}
-
-.card-body :nth-child(2) {
-  flex: 1;
 }

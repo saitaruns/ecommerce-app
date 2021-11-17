@@ -1,20 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MdAccountCircle } from "react-icons/md"
+import { MdAccountCircle, MdLogin } from "react-icons/md"
 import { FaSearch } from "react-icons/fa";
 import Cart from "./Cart"
+import store from '../store';
+import { authActiontypes } from "./../reducers/AuthReducer"
+import { useSelector } from 'react-redux';
 
 
-const Nav = ({ title }) => (
-  <nav className='nav'>
-    <Link className='nav-title' to="/">{title}</Link>
-    <SearchBar />
-    <div className='icon-buttons'> 
-      <Link to="/yourcart"><Cart /></Link>
-      <Link to="/profile"><MdAccountCircle style={{padding:"0 5px",fontSize:"28px"}} /></Link>
-    </div>
-  </nav>
-);
+const Nav = ({ title }) => {
+  const isLogin = useSelector(state => state.auth.isLogin)
+  return (
+    <nav className='nav'>
+      <Link className='nav-title' to="/">{title}</Link>
+      <SearchBar />
+      <div className='icon-buttons'>
+        <Link to="/yourcart"><Cart /></Link>
+        {isLogin ? <Link to="/profile"><MdAccountCircle style={{ padding: "0 5px", fontSize: "28px" }} /></Link> : <span><MdLogin style={{ padding: "0 5px", fontSize: "28px", color: "white" }} /></span>}
+      </div>
+    </nav>
+  )
+}
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');

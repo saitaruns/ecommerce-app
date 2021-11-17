@@ -39,6 +39,7 @@ const DetailsPage = ({ match }) => {
                     <div className="details-image"><img src={prod.image} alt="" /></div>
                     <div className="details">
                         <div className="details-title">{prod.title}</div>
+                        <div className="details-rating">{prod.rating.rate}</div>
                         <div className="details-price">₹{prod.price}</div>
                         <button className='btn' onClick={addToCart}><FaShoppingCart style={{fontSize:"20px"}} /> Add to Cart</button>
                         <div className="details-description">{prod.description}</div>
