@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { MdAccountCircle, MdLogin } from "react-icons/md"
 import { FaSearch } from "react-icons/fa";
 import Cart from "./Cart"
-import store from '../store';
-import { authActiontypes } from "./../reducers/AuthReducer"
 import { useSelector } from 'react-redux';
 
 
